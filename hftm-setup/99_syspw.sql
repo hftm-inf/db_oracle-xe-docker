@@ -1,0 +1,2 @@
+ALTER USER sys IDENTIFIED BY hftadmin;
+ALTER USER system IDENTIFIED BY hftadmin;
