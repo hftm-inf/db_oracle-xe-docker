@@ -1,19 +1,19 @@
 docker-oracle-xe-11g
 ============================
-Oracle 11 XE-Image inklusive der Datenschemen für Kurse DB1 (scott) & DB2 (vereinuser)
+Oracle 11 XE-Image inklusive der Datenschemen für Kurs DB1 (scott)
   
 Image basiert auf das Image von: https://github.com/wnameless/docker-oracle-xe-11g
 
 
 ## Einsatz über Docker-Hub
 ```
-docker pull hftm/oracle-db0
-docker run -d --name oradb -p 1521:1521 hftm/oracle-db0
+docker pull hftm/oracle-db1
+docker run -d --name oradb -p 1521:1521 hftm/oracle-db1
 ```
 
 Falls du die Daten in einem Volume persistieren möchtest: (Daten werden auf Host in 'oradata' gespeichert.)
 ```
-docker run -d --name oradb -v oradata:/u01/app/oracle -p 1521:1521 hftm/oracle-db0
+docker run -d --name oradb -v oradata:/u01/app/oracle -p 1521:1521 hftm/oracle-db1
 ```
 
 ## Anmelde-Optionen
@@ -30,5 +30,5 @@ sql vereinuser/vereinuser
 
 ## Image lokal builden
 ```
-docker build -t hftm/oracle-db0 .
+docker build -t hftm/oracle-db1 .
 ```
