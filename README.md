@@ -7,10 +7,14 @@ Image basiert auf das Image von: https://github.com/wnameless/docker-oracle-xe-1
 
 ## Einsatz über Docker-Hub
 ```
-docker pull hftm/oracle-xe-11g
-docker run -d --name oradb -p 1521:1521 hftm/oracle-xe-11g
+docker pull hftm/oracle-db0
+docker run -d --name oradb -p 1521:1521 hftm/oracle-db0
 ```
 
+Falls du die Daten in einem Volume persistieren möchtest: (Daten werden auf Host in 'oradata' gespeichert.)
+```
+docker run -d --name oradb -v oradata:/u01/app/oracle -p 1521:1521 hftm/oracle-db0
+```
 
 ## Anmelde-Optionen
 ```
@@ -26,5 +30,5 @@ sql vereinuser/vereinuser
 
 ## Image lokal builden
 ```
-docker build -t hftm/oracle-xe-11g .
+docker build -t hftm/oracle-db0 .
 ```
