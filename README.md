@@ -22,10 +22,7 @@ sql vereinuser/vereinuser
 ## Troubleshooting mit Docker for Windows
 1. Docker-Dienst neustarten!
 
-2. Ev. Image neubauen
-
-
-3. Factory Reset der Docker-Installation
+2. Factory Reset der Docker-Installation
 
 ## Image lokal builden
 ```
