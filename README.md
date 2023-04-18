@@ -35,7 +35,7 @@ sql vereinuser/vereinuser
 
 ## Zugriffsbeispiel über SQLplus in Container
 ```
-docker exec -it oradb sqlplus sys/hftadmin as sysdba
+docker exec -it oradb sqlplus
 ```
 
 ## Images anpassen
