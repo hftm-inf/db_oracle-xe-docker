@@ -1,32 +1,58 @@
-docker-oracle-xe-11g
+Oracle XE-Container-Image
 ============================
-Oracle 11 XE-Image ohne Daten und zusätzliche Benutzer
+Oracle XE-Image mit Beispiel-Setup für die Datenbank-Kurse an der HFTM.  
+Image basiert auf das Image von: https://github.com/gvenzl/oci-oracle-xe
   
-Image basiert auf das Image von: https://github.com/wnameless/docker-oracle-xe-11g
+
+## Unterstützte Tags
+
+| Tag | Beschreibung |
+| --- | --- |
+| `21-db1` | Datenbank mit emp-dept Beispiel |
+| `21-db2` | Datenbank mit emp-dept und Vereinsdatenbank-Beispiel |
 
 
-## Einsatz über Docker-Hub
+## Einsatz-Beispiel
 ```
-docker pull hftm/oracle-db0
-docker run -d --name oradb -p 1521:1521 hftm/oracle-db0
+docker run -d --name oradb -p 1521:1521 ghcr.io/hftm-inf/oracle-db:21-db1
 ```
 
+*Hinweis: der erste Start des Containers kann 2-3 Minuten in Anspruch nehmen bis du auf die Datenbank zugreifen kannst!*
+<br>
+<br>
+  
 Falls du die Daten in einem Volume persistieren möchtest: (Daten werden auf Host in 'oradata' gespeichert.)
 ```
-docker run -d --name oradb -v oradata:/u01/app/oracle -p 1521:1521 hftm/oracle-db0
+docker run -d --name oradb -v oracle-volume:/opt/oracle/oradata -p 1521:1521 ghcr.io/hftm-inf/oracle-db:21-db1
 ```
 
-## Anmelde-Optionen
+## Anmeldezugriff mit lokaler SQLcl-Installation  
 ```
 sql sys/hftadmin AS SYSDBA
+sql scott/tiger
+sql vereinuser/vereinuser
 ```
 
-## Troubleshooting mit Docker for Windows
-1. Docker-Dienst neustarten!
-
-2. Factory Reset der Docker-Installation
-
-## Image lokal builden
+## Zugriffsbeispiel über SQLplus in Container
 ```
-docker build -t hftm/oracle-db0 .
+docker exec -it oradb sqlplus sys/hftadmin as sysdba
 ```
+
+## Images anpassen
+### Image builden
+Wähle das gewünschte Dockerfile:  
+- Dockerfile-db1: Datenbank mit emp-dept Beispiel
+- Dockerfile-db2: Datenbank mit emp-dept und Vereinsdatenbank-Beispiel
+  
+```
+docker build -t oracle-db -f Dockerfile-db1 .
+docker run --rm --name oradb-testing -p 1521:1521 oracle-db
+```
+
+### Image pushen
+```
+docker tag oracle-db ghcr.io/hftm-inf/oracle-db:21-db1
+docker push ghcr.io/hftm-inf/oracle-db:21-db1
+```
+
+Prüfe das Resultat unter: https://github.com/orgs/hftm-inf/packages/container/package/oracle-db
