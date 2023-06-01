@@ -26,16 +26,25 @@ Falls du die Daten in einem Volume persistieren möchtest: (Daten werden auf Hos
 docker run -d --name oradb -v oracle-volume:/opt/oracle/oradata -p 1521:1521 ghcr.io/hftm-inf/oracle-db:21-db1
 ```
 
-## Anmeldezugriff mit lokaler SQLcl-Installation  
+## Benutzer-Logins
+
+| User | Passwort |
+| --- | --- |
+| sys AS SYSDBA | hftadmin |
+| scott | tiger |
+| vereinuser | vereinuser |
+
+## Zugriffsbeispiel über SQLplus direkt im Container
+```
+docker exec -it oradb sqlplus
+```
+Tipp: Nach dem Login ein `set linesize 999` absetzen.
+
+## Anmeldezugriff mit einer lokaler SQLcl-Installation  
 ```
 sql sys/hftadmin AS SYSDBA
 sql scott/tiger
 sql vereinuser/vereinuser
-```
-
-## Zugriffsbeispiel über SQLplus in Container
-```
-docker exec -it oradb sqlplus
 ```
 
 ## Images anpassen
