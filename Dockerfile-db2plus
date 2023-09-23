@@ -1,0 +1,18 @@
+FROM gvenzl/oracle-xe:21.3.0
+
+LABEL maintainer="Simeon Liniger <simeon.liniger@hftm.ch>"
+
+ENV ORACLE_PASSWORD=hftadmin
+
+ADD hftm-setup/01_setup_users.sql /container-entrypoint-initdb.d/
+ADD hftm-setup/02_emp-dept_tables.sql /container-entrypoint-initdb.d/
+ADD hftm-setup/03_emp-dept_data.sql /container-entrypoint-initdb.d/
+ADD hftm-setup/04_verein_tables.sql /container-entrypoint-initdb.d/
+ADD hftm-setup/05_verein_data.sql /container-entrypoint-initdb.d/
+
+ADD hftm-setup/verein_plus/11_personen.sql /container-entrypoint-initdb.d/
+ADD hftm-setup/verein_plus/12_anlass.sql /container-entrypoint-initdb.d/
+ADD hftm-setup/verein_plus/13_teilnehmer.sql /container-entrypoint-initdb.d/
+ADD hftm-setup/verein_plus/14_sponsoren.sql /container-entrypoint-initdb.d/
+ADD hftm-setup/verein_plus/15_sponsorenkontakt.sql /container-entrypoint-initdb.d/
+ADD hftm-setup/verein_plus/16_spenden.sql /container-entrypoint-initdb.d/

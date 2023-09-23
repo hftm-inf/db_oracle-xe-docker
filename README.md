@@ -10,6 +10,7 @@ Image basiert auf das Image von: https://github.com/gvenzl/oci-oracle-xe
 | --- | --- |
 | `21-db1` | Datenbank mit emp-dept Beispiel |
 | `21-db2` | Datenbank mit emp-dept und Vereinsdatenbank-Beispiel |
+| `21-db2plus` | Datenbank mit emp-dept und Vereinsdatenbank-Beispiel mit mehr Datensätzen. Daten-Initialisierung braucht etwas Zeit nach dem Starten! :-) |
 | `21-pdb2` | Datenbank mit emp-dept und Vereinsdatenbank-Beispiel mit Einsatz der Pluggable DB |
 
 
@@ -67,17 +68,18 @@ alter session set container=cdb$root;
 Wähle das gewünschte Dockerfile:  
 - Dockerfile-db1: Datenbank mit emp-dept Beispiel  
 - Dockerfile-db2: Datenbank mit emp-dept und Vereinsdatenbank-Beispiel  
+- Dockerfile-db2plus: Datenbank mit emp-dept und Vereinsdatenbank-Beispiel mit mehr Datensätzen  
 - Dockerfile-pdb2: Datenbank mit emp-dept und Vereinsdatenbank-Beispiel mit Einsatz der Pluggable DB  
   
 ```
-docker build -t oracle-db -f Dockerfile-pdb2 .
-docker run --rm --name oradb-testing -p 1521:1521 oracle-db
+docker build -t oracle-db -f Dockerfile-db2plus .
+docker run --rm --name oradb-testing -p 1522:1521 oracle-db
 ```
 
 ### Image pushen
 ```
-docker tag oracle-db ghcr.io/hftm-inf/oracle-db:21-pdb2
-docker push ghcr.io/hftm-inf/oracle-db:21-pdb2
+docker tag oracle-db ghcr.io/hftm-inf/oracle-db:21-db2plus
+docker push ghcr.io/hftm-inf/oracle-db:21-db2plus
 ```
 
 Prüfe das Resultat unter: https://github.com/orgs/hftm-inf/packages/container/package/oracle-db
